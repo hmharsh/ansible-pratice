@@ -1,0 +1,11 @@
+---
+  - hosts: localhost
+    vars:
+      guests:
+        - hh
+        - mm
+        - aa
+        - bb
+    tasks:
+      - include: debug.yaml
+        with_items: "{{guests}}"
