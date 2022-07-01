@@ -1,0 +1,14 @@
+---
+  - hosts: all
+    vars_files: vars.yaml
+    pre_tasks:
+      - name: pre_task
+        debug: msg="in Pre Task"
+    tasks:
+      - name: debug variable
+        debug: msg="in actual current play task{{myname}}"
+    roles:
+     - role: ./role1
+    post_tasks:
+      - name: post_task
+        debug: msg="in post Task"

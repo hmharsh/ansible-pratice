@@ -1,0 +1,4 @@
+---
+- name: test task
+  debug:
+    msg: "Inside role 1 {{var_source}}"

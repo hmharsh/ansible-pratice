@@ -1,0 +1,17 @@
+---
+  - hosts: localhost
+    vars:
+      name: harshit
+    tasks:
+    - name: creating file from jinja
+      template: 
+        src: ./template.j2
+        dest: /tmp/template.txt
+    - name: fetch details
+      uri:
+        url: https://code.dev.cloudservices.acquia.io/api/v4/projects
+      register: jsondata
+    - name: display data
+      debug:
+        var: jsondata.json | json_query('[*].id')
+

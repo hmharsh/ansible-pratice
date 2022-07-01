@@ -1,0 +1,26 @@
+---
+  - hosts: all
+    tasks:
+      - name: create a file
+        copy:
+          dest: /tmp/test.txt
+          content: |
+            hello harshit mahajan
+            some multiline contet here
+        tags: 
+          - write
+      - name: wait for file to be available
+        ansible.builtin.wait_for:
+          path: /tmp/test.txt
+          state: present
+          search_regex: "harshit"
+          msg: Timeout to find file /tmp/test.txt
+      - name: check file attributes
+        ansible.builtin.stat:
+          path: /tmp/test.txt
+        register: test_file_stat
+      - name: show the details
+        debug:
+          var: test_file_stat
+
+
