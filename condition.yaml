@@ -1,0 +1,14 @@
+---
+  - hosts: localhost
+    tasks:
+      - name: check file availability
+        stat:
+          path: /tmp/harshit.txt
+        register: is_file_exists  
+      - name: create if not exists
+        copy:
+          dest: /tmp/harshit.txt
+          content: |
+            harshit
+            mahajan
+        when: not is_file_exists.stat.exists 
